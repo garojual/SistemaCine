@@ -37,6 +37,7 @@ public class Tiquete {
 
         this.cliente = new Cliente(nombreCliente, idCliente, edad);
 
+        //Desplegar menu de pelicula
 
 
     }
