@@ -45,7 +45,7 @@ public class Tiquete {
                 case 1:
                     System.out.print("\n ##### Peliculas en Cartelera ##### \n");
                     funciones.getPeliculas(1);
-                    System.out.print("\n #### 1Presione Enter Para Volver ##### \n");
+                    System.out.print("\n #### Presione Enter Para Volver ##### \n");
                     scanner.nextLine();
                     break;
                 case 2:
@@ -55,7 +55,7 @@ public class Tiquete {
                     //crear funcion
                     break;
                 default:
-                    //no hacer nada
+                    System.out.print("Error: Opcion fuera de los parametros, volviendo al inicio...");
                     break;
             }
 
@@ -66,18 +66,29 @@ public class Tiquete {
 
         //Obtencion Informacion Cliente
 
-        System.out.print("Por favor digite su nombre");
+        System.out.print("Por favor digite su nombre\n");
         this.nombreCliente = scanner.nextLine();
 
-        System.out.print("Por favor digite su numero de documento de identidad");
+        System.out.print("Por favor digite su numero de documento de identidad\n");
         this.idCliente = scanner.nextLine();
 
-        System.out.print("Por favor digite su edad");
+        System.out.print("Por favor digite su edad\n");
         int edad = Integer.parseInt(scanner.nextLine());
 
         this.cliente = new Cliente(nombreCliente, idCliente, edad);
 
-        //Desplegar menu de pelicula
+        //Elegir Pelicula
+        System.out.print("Por favor, eliga la pelicula que desea ver\n");
+
+        funciones.getPeliculas(1);
+        int opcion = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("\n ##### Funciones ##### \n");
+        System.out.print("\n Por favor, seleccione el numero de la sala\n");
+        Pelicula pelicula = funciones.getPeliculaPorNum(opcion);
+        funciones.mostrarSalasPorPelicula(pelicula);
+
+        int salaElegida = Integer.parseInt(scanner.nextLine());
 
 
     }

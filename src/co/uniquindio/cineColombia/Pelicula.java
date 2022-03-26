@@ -2,10 +2,12 @@ package co.uniquindio.cineColombia;
 
 public class Pelicula {
     private String nombre;
-    private int duracion;
+    private double duracion;
     private TipoCategoria categoria;
+    private int horaInicio;
+    private int horafin;
 
-    public Pelicula(String nombre, int duracion, TipoCategoria categoria) {
+    public Pelicula(String nombre, double duracion, TipoCategoria categoria) {
         this.nombre = nombre;
         this.duracion = duracion;
         this.categoria = categoria;
@@ -19,7 +21,7 @@ public class Pelicula {
         this.nombre = nombre;
     }
 
-    public int getDuracion() {
+    public double getDuracion() {
         return duracion;
     }
 
@@ -33,5 +35,13 @@ public class Pelicula {
 
     public void setCategoria(TipoCategoria categoria) {
         this.categoria = categoria;
+    }
+
+    public int getHoraInicio() {
+        return horaInicio;
+    }
+
+    public int getHorafin() {
+        return horafin;
     }
 }

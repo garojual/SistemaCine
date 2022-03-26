@@ -1,18 +1,17 @@
 package co.uniquindio.cineColombia;
 
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Funcion {
     //private Zona zonaAsignada;
     private ArrayList<Pelicula> listaPeliculas;
-    private Date horarioInicio;
+    private Time horarioInicio;
     private SalaCine sala;
     private int duracion; //Examinar a fondo la necesodad de este dato
 
-    public Funcion(SalaCine salaAsignada, Date horarioInicio, Pelicula pel1, Pelicula pel2, Pelicula pel3 , Pelicula pel4) {
+    public Funcion(SalaCine salaAsignada, Time horarioInicio, Pelicula pel1, Pelicula pel2, Pelicula pel3 , Pelicula pel4) {
         this.sala = salaAsignada;
-        //this.zonaAsignada = zonaAsignada;
         crearListaPeliculas(pel1, pel2, pel3, pel4);
         this.horarioInicio = horarioInicio;
         this.sala = sala;
@@ -26,6 +25,18 @@ public class Funcion {
         listaPeliculas.add(pel2);
         listaPeliculas.add(pel3);
         listaPeliculas.add(pel4);
+    }
+
+    public boolean buscarEnLista(Pelicula pelicula){
+
+        boolean isPeliculainLista = false;
+
+        for(int i = 0; i < listaPeliculas.size(); i++){
+            if(pelicula == listaPeliculas.get(i)){
+                isPeliculainLista = true;
+            }
+        }
+        return isPeliculainLista;
     }
 
     /*public Zona getZonaAsignada() {
@@ -43,21 +54,32 @@ public class Funcion {
     public String getListaPeliculasToString(){
         String listaPeliculasStr = "";
 
-        for(int i = 0; i < 4; i++){
-            listaPeliculasStr = listaPeliculasStr + "["+i+"]" + listaPeliculas.get(i).getNombre() +"\n";
+        for(int i = 0; i < listaPeliculas.size(); i++){
+            int aux = i +1;
+            listaPeliculasStr = listaPeliculasStr + "["+aux+"]" + listaPeliculas.get(i).getNombre() +"\n";
         }
         return listaPeliculasStr;
+    }
+
+    public int getIndexPeliculaEnLista(Pelicula pelicula){
+        int aux = -1;
+        for(int i = 0; i < listaPeliculas.size() && aux == -1; i++) {
+            if (pelicula == listaPeliculas.get(i)) {
+                aux = i;
+            }
+        }
+        return aux;
     }
 
     public void setListaPeliculas(ArrayList<Pelicula> listaPeliculas) {
         this.listaPeliculas = listaPeliculas;
     }
 
-    public Date getHorarioInicio() {
+    public Time getHorarioInicio() {
         return horarioInicio;
     }
 
-    public void setHorarioInicio(Date horarioInicio) {
+    public void setHorarioInicio(Time horarioInicio) {
         this.horarioInicio = horarioInicio;
     }
 
