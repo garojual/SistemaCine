@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Funcion {
-    private Zona zonaAsignada;
+    //private Zona zonaAsignada;
     private ArrayList<Pelicula> listaPeliculas;
-
     private Date horarioInicio;
     private SalaCine sala;
-    private int duracion;
+    private int duracion; //Examinar a fondo la necesodad de este dato
 
-    public Funcion(Zona zonaAsignada, Date horarioInicio, SalaCine sala, int duracion, Pelicula pel1, Pelicula pel2, Pelicula pel3 , Pelicula pel4) {
-        this.zonaAsignada = zonaAsignada;
+    public Funcion(SalaCine salaAsignada, Date horarioInicio, Pelicula pel1, Pelicula pel2, Pelicula pel3 , Pelicula pel4) {
+        this.sala = salaAsignada;
+        //this.zonaAsignada = zonaAsignada;
         crearListaPeliculas(pel1, pel2, pel3, pel4);
         this.horarioInicio = horarioInicio;
         this.sala = sala;
-        this.duracion = duracion;
 
     }
 
@@ -27,19 +26,27 @@ public class Funcion {
         listaPeliculas.add(pel2);
         listaPeliculas.add(pel3);
         listaPeliculas.add(pel4);
-
     }
 
-    public Zona getZonaAsignada() {
+    /*public Zona getZonaAsignada() {
         return zonaAsignada;
     }
 
     public void setZonaAsignada(Zona zonaAsignada) {
         this.zonaAsignada = zonaAsignada;
-    }
+    }*/
 
     public ArrayList<Pelicula> getListaPeliculas() {
         return listaPeliculas;
+    }
+
+    public String getListaPeliculasToString(){
+        String listaPeliculasStr = "";
+
+        for(int i = 0; i < 4; i++){
+            listaPeliculasStr = listaPeliculasStr + "["+i+"]" + listaPeliculas.get(i).getNombre() +"\n";
+        }
+        return listaPeliculasStr;
     }
 
     public void setListaPeliculas(ArrayList<Pelicula> listaPeliculas) {

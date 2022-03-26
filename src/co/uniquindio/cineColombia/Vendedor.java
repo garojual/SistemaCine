@@ -6,4 +6,7 @@ public class Vendedor extends PersonalCine{
         super(nombre, docIdentidad, idTrabajador);
     }
 
+    public void generarTiquete(){
+    }
+
 }

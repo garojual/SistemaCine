@@ -1,4 +1,5 @@
 package co.uniquindio.cineColombia;
+import java.util.Scanner;
 
 public class Tiquete {
 
@@ -6,21 +7,38 @@ public class Tiquete {
     private String nombreCliente;
     private String idCliente;
     private String idVendedor;
-    private Funcion funciones;
+    private FuncionCine funciones;
     private Cliente cliente;
-    private Vendedor vendedor;
+    //private Vendedor vendedor;
 
     private int precio;
 
     public Tiquete(String referencia, String nombreCliente, String idCliente, String idVendedor, Funcion funciones, Cliente cliente, Vendedor vendedor, int precio) {
+
         this.referencia = referencia;
-        this.nombreCliente = nombreCliente;
-        this.idCliente = idCliente;
         this.idVendedor = idVendedor;
-        this.funciones = funciones;
-        this.cliente = cliente;
-        this.vendedor = vendedor;
-        this.precio = precio;
+        this.funciones = new FuncionCine();
+        //this.vendedor = vendedor;
+    }
+
+    public void asignarPelicula(){
+
+        //Obtencion Informacion Cliente
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Por favor digite su nombre");
+        this.nombreCliente = scanner.nextLine();
+
+        System.out.print("Por favor digite su numero de documento de identidad");
+        this.idCliente = scanner.nextLine();
+
+        System.out.print("Por favor digite su edad");
+        int edad = Integer.parseInt(scanner.nextLine());
+
+        this.cliente = new Cliente(nombreCliente, idCliente, edad);
+
+
+
     }
 
 
@@ -56,11 +74,11 @@ public class Tiquete {
         this.idVendedor = idVendedor;
     }
 
-    public Funcion getFunciones() {
+    public FuncionCine getFunciones() {
         return funciones;
     }
 
-    public void setFunciones(Funcion funciones) {
+    public void setFunciones(FuncionCine funciones) {
         this.funciones = funciones;
     }
 
@@ -72,13 +90,13 @@ public class Tiquete {
         this.cliente = cliente;
     }
 
-    public Vendedor getVendedor() {
+    /*public Vendedor getVendedor() {
         return vendedor;
     }
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
-    }
+    }*/
 
     public int getPrecio() {
         return precio;
