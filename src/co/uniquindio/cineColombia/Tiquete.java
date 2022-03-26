@@ -30,19 +30,23 @@ public class Tiquete {
 
         while (opcion!= 4) {
 
-            System.out.print("Bienvenido a Cine Colombia \n");
+            System.out.print("##### Bienvenido a Cine Colombia ##### \n");
             System.out.print("\n Por favor, seleccione una opcion\n");
             System.out.print("\n [1] Ver Cartelera General");
             System.out.print("\n [2] Comprar Tiquete");
             System.out.print("\n [3] Cancelar Tiquete");
             System.out.print("\n [4] Salir \n");
+            System.out.print("##### © 2022 Cine Colombia ##### \n");
 
             opcion = Integer.parseInt(scanner.nextLine());
 
             switch(opcion){
 
                 case 1:
+                    System.out.print("\n ##### Peliculas en Cartelera ##### \n");
                     funciones.getPeliculas(1);
+                    System.out.print("\n #### 1Presione Enter Para Volver ##### \n");
+                    scanner.nextLine();
                     break;
                 case 2:
                     asignarPelicula();
