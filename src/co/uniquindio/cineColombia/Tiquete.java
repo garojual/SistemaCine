@@ -9,22 +9,58 @@ public class Tiquete {
     private String idVendedor;
     private FuncionCine funciones;
     private Cliente cliente;
+    private Scanner scanner;
     //private Vendedor vendedor;
 
     private int precio;
 
-    public Tiquete(String referencia, String nombreCliente, String idCliente, String idVendedor, Funcion funciones, Cliente cliente, Vendedor vendedor, int precio) {
+    public Tiquete(String referencia, String idVendedor) {
 
+        this.scanner = new Scanner(System.in);
         this.referencia = referencia;
         this.idVendedor = idVendedor;
         this.funciones = new FuncionCine();
         //this.vendedor = vendedor;
     }
 
+    public void mostrarMenu(){
+        //Mostrar Menu
+
+        int opcion = 0;
+
+        while (opcion!= 4) {
+
+            System.out.print("Bienvenido a Cine Colombia \n");
+            System.out.print("\n Por favor, seleccione una opcion\n");
+            System.out.print("\n [1] Ver Cartelera General");
+            System.out.print("\n [2] Comprar Tiquete");
+            System.out.print("\n [3] Cancelar Tiquete");
+            System.out.print("\n [4] Salir \n");
+
+            opcion = Integer.parseInt(scanner.nextLine());
+
+            switch(opcion){
+
+                case 1:
+                    funciones.getPeliculas(1);
+                    break;
+                case 2:
+                    asignarPelicula();
+                    break;
+                case 3:
+                    //crear funcion
+                    break;
+                default:
+                    //no hacer nada
+                    break;
+            }
+
+        }
+    }
+
     public void asignarPelicula(){
 
         //Obtencion Informacion Cliente
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Por favor digite su nombre");
         this.nombreCliente = scanner.nextLine();
