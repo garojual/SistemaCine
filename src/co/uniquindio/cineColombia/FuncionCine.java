@@ -21,6 +21,7 @@ public class FuncionCine {
     Funcion funcion4;
 
     Date horaApertura;
+    double horarioApertura = 12.00;
 
 
     public FuncionCine() {
@@ -57,5 +58,7 @@ public class FuncionCine {
         }
         return listaPeliculas;
     }
+
+
 
 }
