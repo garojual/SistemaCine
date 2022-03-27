@@ -188,6 +188,41 @@ public class FuncionCine {
         }
     }
 
+    public boolean comprobarEdad (String pelicula, int edad) {
+
+        boolean aux = true;
+
+        for (int j = 0; j < listaFuncionesSala1.size(); j++) {
+            if (listaFuncionesSala1.get(j).getPelicula().getNombre().equals(pelicula)){
+                switch(listaFuncionesSala1.get(j).getPelicula().getCategoria()){
+                    case P13:
+                        if(edad < 13){
+                            aux = false;
+                            return aux;
+                        }
+                    case P15:
+                        if(edad < 15){
+                            aux = false;
+                            return aux;
+                        }
+                    case P10:
+                        if(edad < 10){
+                            aux = false;
+                            return aux;
+                        }
+                    case P18:
+                        if(edad < 18){
+                            aux = false;
+                            return aux;
+                        }
+                    default:
+                        return aux;
+                }
+            }
+        }
+        return aux;
+    }
+
     public ArrayList<Integer> getHoraPelicula (String pelicula) {
         ArrayList<Integer> horaPelicula= new ArrayList<>();
 

@@ -8,14 +8,6 @@ public class SalaCine {
     private Zona zonaNormal;
     private ArrayList<Funcion> funciones;
 
-    public ArrayList<Funcion> getFunciones() {
-        return funciones;
-    }
-
-    public void setFunciones(ArrayList<Funcion> funciones) {
-        this.funciones = funciones;
-    }
-
 
     public SalaCine() {
 
@@ -60,5 +52,13 @@ public class SalaCine {
 
     public void setZonaNormal(Zona zonaNormal) {
         this.zonaNormal = zonaNormal;
+    }
+
+    public ArrayList<Funcion> getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(ArrayList<Funcion> funciones) {
+        this.funciones = funciones;
     }
 }

@@ -5,21 +5,22 @@ public class Tiquete {
 
     private String nombreCliente;
     private String idCliente;
-    private String idVendedor;
     private FuncionCine funciones;
     private Cliente cliente;
     private Scanner scanner;
     private int numPel;
-    //private Vendedor vendedor;
+    private Vendedor vendedor;
+    private int numSala;
 
     private int precio;
 
-    public Tiquete(String idVendedor) {
+    public Tiquete(Vendedor vendedor) {
 
         this.scanner = new Scanner(System.in);
-        this.idVendedor = idVendedor;
         this.funciones = new FuncionCine();
-        //this.vendedor = vendedor;
+        this.vendedor = vendedor;
+
+        mostrarMenu();
     }
 
     public void mostrarMenu(){
@@ -49,16 +50,15 @@ public class Tiquete {
                     break;
                 case 2:
                     asignarPelicula();
-                    asignarAsientos();
                     break;
                 case 3:
                     generarBoletoString();
                     break;
+                case 4:
+                    break;
                 default:
                     System.out.print("Error: Opcion fuera de los parametros, volviendo al inicio...");
-                    break;
             }
-
         }
     }
 
@@ -84,14 +84,20 @@ public class Tiquete {
 
         String nombrePelElegida = funciones.getPeliculas(this.numPel);
 
-        System.out.print("\n##### Horarios ##### \n");
-        System.out.print("Por favor elija el numero de Sala \n");
-        funciones.mostrarHorarioYSala(funciones.getHoraPelicula(nombrePelElegida));
+        if(funciones.comprobarEdad(nombrePelElegida, edad)){
+            System.out.print("\n##### Horarios ##### \n");
+            System.out.print("Por favor elija el numero de Sala \n");
+            funciones.mostrarHorarioYSala(funciones.getHoraPelicula(nombrePelElegida));
+            asignarAsientos();
+        }
+        else{
+            System.out.print("\n Usted no cumple con la edad minima para ver la pelicula \n");
+        }
 
     }
 
     public void asignarAsientos(){
-        int numSala = 0;
+        numSala = 0;
 
         while (numSala < 1 || numSala > 4){
             numSala = Integer.parseInt(scanner.nextLine());
@@ -106,8 +112,9 @@ public class Tiquete {
 
     public void generarBoletoString(){
         System.out.print("\n##### Informacion Boleto ##### \n");
-        System.out.print("Nombre del Cliente: " + this.nombreCliente + "         Documento Identidad: " + this.idCliente);
-        System.out.print("Pelicula: " +  funciones.getPeliculas(this.numPel) );
+        System.out.print("Nombre del Cliente: " + this.nombreCliente + "         Documento Identidad: " + this.idCliente + "\n");
+        System.out.print("Pelicula: " +  funciones.getPeliculas(this.numPel) + "        Sala: "+ numSala +"\n");
+        System.out.print("Nombre del Vendedor: " + vendedor.getNombre() + "         Id : " + vendedor.getIdTrabajador()+ "\n");
     }
 
 
@@ -127,14 +134,6 @@ public class Tiquete {
         this.idCliente = idCliente;
     }
 
-    public String getIdVendedor() {
-        return idVendedor;
-    }
-
-    public void setIdVendedor(String idVendedor) {
-        this.idVendedor = idVendedor;
-    }
-
     public FuncionCine getFunciones() {
         return funciones;
     }
@@ -151,13 +150,13 @@ public class Tiquete {
         this.cliente = cliente;
     }
 
-    /*public Vendedor getVendedor() {
+    public Vendedor getVendedor() {
         return vendedor;
     }
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
-    }*/
+    }
 
     public int getPrecio() {
         return precio;
