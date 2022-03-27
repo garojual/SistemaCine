@@ -1,85 +1,59 @@
 package co.uniquindio.cineColombia;
 
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Funcion {
-    //private Zona zonaAsignada;
-    private ArrayList<Pelicula> listaPeliculas;
-    private Time horarioInicio;
+    private Zona zonaGeneral;
+    private Zona zonaPreferencial;
+    private Pelicula pelicula;
+    private int horarioInicio;
     private SalaCine sala;
-    private int duracion; //Examinar a fondo la necesodad de este dato
 
-    public Funcion(SalaCine salaAsignada, Time horarioInicio, Pelicula pel1, Pelicula pel2, Pelicula pel3 , Pelicula pel4) {
+
+    public Funcion(SalaCine salaAsignada, int horarioInicio, Pelicula pelicula) {
         this.sala = salaAsignada;
-        crearListaPeliculas(pel1, pel2, pel3, pel4);
         this.horarioInicio = horarioInicio;
-        this.sala = sala;
+        this.pelicula= pelicula;
 
     }
 
-    public void crearListaPeliculas(Pelicula pel1, Pelicula pel2, Pelicula pel3, Pelicula pel4) {
-        listaPeliculas = new ArrayList<>();
-
-        listaPeliculas.add(pel1);
-        listaPeliculas.add(pel2);
-        listaPeliculas.add(pel3);
-        listaPeliculas.add(pel4);
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
-    public boolean buscarEnLista(Pelicula pelicula){
-
-        boolean isPeliculainLista = false;
-
-        for(int i = 0; i < listaPeliculas.size(); i++){
-            if(pelicula == listaPeliculas.get(i)){
-                isPeliculainLista = true;
-            }
-        }
-        return isPeliculainLista;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
+
+
 
     /*public Zona getZonaAsignada() {
         return zonaAsignada;
     }
-
     public void setZonaAsignada(Zona zonaAsignada) {
         this.zonaAsignada = zonaAsignada;
     }*/
 
-    public ArrayList<Pelicula> getListaPeliculas() {
+    /*public ArrayList<Pelicula> getListaPeliculas() {
         return listaPeliculas;
     }
-
     public String getListaPeliculasToString(){
         String listaPeliculasStr = "";
-
-        for(int i = 0; i < listaPeliculas.size(); i++){
-            int aux = i +1;
-            listaPeliculasStr = listaPeliculasStr + "["+aux+"]" + listaPeliculas.get(i).getNombre() +"\n";
+        for(int i = 0; i < 4; i++){
+            listaPeliculasStr = listaPeliculasStr + "["+i+"]" + listaPeliculas.get(i).getNombre() +"\n";
         }
         return listaPeliculasStr;
     }
-
-    public int getIndexPeliculaEnLista(Pelicula pelicula){
-        int aux = -1;
-        for(int i = 0; i < listaPeliculas.size() && aux == -1; i++) {
-            if (pelicula == listaPeliculas.get(i)) {
-                aux = i;
-            }
-        }
-        return aux;
-    }
-
     public void setListaPeliculas(ArrayList<Pelicula> listaPeliculas) {
         this.listaPeliculas = listaPeliculas;
-    }
+    }*/
 
-    public Time getHorarioInicio() {
+    public int getHorarioInicio() {
         return horarioInicio;
     }
 
-    public void setHorarioInicio(Time horarioInicio) {
+    public void setHorarioInicio(int horarioInicio) {
         this.horarioInicio = horarioInicio;
     }
 
@@ -89,13 +63,5 @@ public class Funcion {
 
     public void setSala(SalaCine sala) {
         this.sala = sala;
-    }
-
-    public int getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
     }
 }

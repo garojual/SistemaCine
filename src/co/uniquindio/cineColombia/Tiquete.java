@@ -43,9 +43,9 @@ public class Tiquete {
             switch(opcion){
 
                 case 1:
-                    System.out.print("\n ##### Peliculas en Cartelera ##### \n");
-                    funciones.getPeliculas(1);
-                    System.out.print("\n #### Presione Enter Para Volver ##### \n");
+                    System.out.print("\n##### Peliculas en Cartelera ##### \n");
+                    funciones.getPeliculas();
+                    System.out.print("\n#### Presione Enter Para Volver ##### \n");
                     scanner.nextLine();
                     break;
                 case 2:
@@ -78,21 +78,23 @@ public class Tiquete {
         this.cliente = new Cliente(nombreCliente, idCliente, edad);
 
         //Elegir Pelicula
-        System.out.print("Por favor, eliga la pelicula que desea ver\n");
+        System.out.print("\n##### Por favor, elija la pelicula que desea ver ##### \n");
+        funciones.getPeliculas();
+        int numPel = Integer.parseInt(scanner.nextLine());
 
-        funciones.getPeliculas(1);
-        int opcion = Integer.parseInt(scanner.nextLine());
+        String nombrePelElegida = funciones.getPeliculas(numPel);
 
-        System.out.print("\n ##### Funciones ##### \n");
-        System.out.print("\n Por favor, seleccione el numero de la sala\n");
-        Pelicula pelicula = funciones.getPeliculaPorNum(opcion);
-        funciones.mostrarSalasPorPelicula(pelicula);
+        System.out.print("\n##### Horarios ##### \n");
+        System.out.print("Por favor elija el numero de Sala");
+        funciones.mostrarHorarioYSala(funciones.getHoraPelicula(nombrePelElegida));
+        int numSala = Integer.parseInt(scanner.nextLine());
 
-        int salaElegida = Integer.parseInt(scanner.nextLine());
+        //Paso a Funcion de asignarAsientos
+        asignarAsientos(numSala);
 
     }
 
-    public void asignarAsientos(){
+    public void asignarAsientos(int numSala){
 
     }
 

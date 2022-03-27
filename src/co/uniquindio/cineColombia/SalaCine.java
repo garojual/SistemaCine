@@ -6,6 +6,15 @@ public class SalaCine {
     private boolean isLlena;
     private Zona zonaPref;
     private Zona zonaNormal;
+    private ArrayList<Funcion> funciones;
+
+    public ArrayList<Funcion> getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(ArrayList<Funcion> funciones) {
+        this.funciones = funciones;
+    }
 
 
     public SalaCine() {
@@ -23,32 +32,7 @@ public class SalaCine {
         return isLlena;
     }
 
-    public void elegirSillaPorZona(int num, int numSilla){
 
-        switch (num){
-            case 1:
-                if(zonaNormal.comprobarDisponibilidad(numSilla)){
-                    zonaNormal.llenarSillas(numSilla);
-                    System.out.print("Silla " + numSilla + " Registrada Correctamente");
-                    break;
-                }
-                else{
-                    System.out.print("Silla Ocupada");
-                    break;
-                }
-            case 2:
-                if(zonaPref.comprobarDisponibilidad(numSilla)){
-                    zonaPref.llenarSillas(numSilla);
-                    System.out.print("Silla " + numSilla + " Registrada Correctamente");
-                    break;
-                }
-                else{
-                    System.out.print("Silla Ocupada");
-                    break;
-                }
-        }
-
-    }
 
     public boolean isLlena() {
 
