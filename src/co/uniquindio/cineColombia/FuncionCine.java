@@ -1,20 +1,25 @@
 package co.uniquindio.cineColombia;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Scanner;
 
 public class FuncionCine {
+
+    private Scanner scanner = new Scanner(System.in);
+
+    private int dineroRecaudado;
 
     private Pelicula pelicula1 = new Pelicula("Metal Gear Solid 4", 2, TipoCategoria.P18);
     private Pelicula pelicula2 = new Pelicula("Bonnie and Clyde", 2, TipoCategoria.P18);
     private Pelicula pelicula3 = new Pelicula("Spiderman",  2, TipoCategoria.P15);
     private Pelicula pelicula4 = new Pelicula("Encanto",  2, TipoCategoria.P10);
 
-    private ArrayList<Funcion> listaFuncionesSala1=new ArrayList<>();
-    private ArrayList<Funcion> listaFuncionesSala2=new ArrayList<>();
-    private ArrayList<Funcion> listaFuncionesSala3=new ArrayList<>();
-    private ArrayList<Funcion> listaFuncionesSala4=new ArrayList<>();
-    private ArrayList<SalaCine> salasCines=new ArrayList<>();
+    private ArrayList<Funcion> listaFuncionesSala1 = new ArrayList<>();
+    private ArrayList<Funcion> listaFuncionesSala2 = new ArrayList<>();
+    private ArrayList<Funcion> listaFuncionesSala3 = new ArrayList<>();
+    private ArrayList<Funcion> listaFuncionesSala4 = new ArrayList<>();
+    private ArrayList<SalaCine> salasCines         = new ArrayList<>();
+    private ArrayList<Integer> infoZonaYSilla      = new ArrayList<>();
 
 
     SalaCine sala1 = new SalaCine();
@@ -35,7 +40,6 @@ public class FuncionCine {
             int aux = i+1;
             System.out.print("["+aux+"]"+listaFuncionesSala1.get(i).getPelicula().getNombre()+"\n");
         }
-
     }
 
     public FuncionCine() {
@@ -86,7 +90,103 @@ public class FuncionCine {
         salasCines.add(sala4);
     }
 
+    public boolean comprobarSala(int numSala){
+        boolean proseguirCompra = false;
 
+        switch (numSala) {
+            case 1:
+                if (!sala1.isSalaLlena()) {
+                    proseguirCompra = true;
+                    elegirZona(sala1);
+                    return proseguirCompra;
+                } else {
+                    System.out.print("La sala actual esta llena");
+                }
+                return proseguirCompra;
+
+            case 2:
+                if (!sala2.isSalaLlena()) {
+                    proseguirCompra = true;
+                    elegirZona(sala2);
+                    return proseguirCompra;
+                } else {
+                    System.out.print("La sala actual esta llena");
+                }
+                return proseguirCompra;
+
+            case 3:
+                if (!sala3.isSalaLlena()) {
+                    proseguirCompra = true;
+                    elegirZona(sala3);
+                    return proseguirCompra;
+                } else {
+                    System.out.print("La sala actual esta llena");
+                }
+                return proseguirCompra;
+
+            case 4:
+                if (!sala4.isSalaLlena()) {
+                    proseguirCompra = true;
+                    elegirZona(sala4);
+                    return proseguirCompra;
+                } else {
+                    System.out.print("La sala actual esta llena");
+                }
+                return proseguirCompra;
+
+            default:
+                return proseguirCompra;
+        }
+    }
+
+    public ArrayList elegirZona(SalaCine sala) {
+        int zonaElegida = 0;
+        int numSilla;
+        boolean aux = false;
+
+        while (zonaElegida < 1 || zonaElegida > 2) {
+            System.out.print("\n##### Elige el tipo de zona #####\n");
+            System.out.print("\n [" + 1 + "] Zona Normal : $7000");
+            System.out.print("\n [" + 2 + "] Zona Preferencial : $10000");
+            zonaElegida = Integer.parseInt(scanner.nextLine());
+        }
+        System.out.print("\n##### Elige tu numero de silla, comprobaremos si esta disponible #####\n");
+        if (zonaElegida == 1){
+            while(!aux) {
+                System.out.print(" Valores de 1 - 30\n");
+                numSilla = Integer.parseInt(scanner.nextLine());
+
+                if (sala.getZonaNormal().comprobarDisponibilidad(numSilla)) {
+                    sala.getZonaNormal().llenarSillas(numSilla);
+                    infoZonaYSilla.add(1);
+                    infoZonaYSilla.add(numSilla);
+                    sumarDinero(7000);
+                    aux = true;
+                } else {
+                    System.out.print("\n##### Silla no disponible, por favor elija otra #####\n");
+                }
+            }
+            return infoZonaYSilla;
+        }
+        else{
+            while (!aux) {
+                System.out.print(" Valores de 1 - 20\n");
+                numSilla = Integer.parseInt(scanner.nextLine());
+
+                if (sala.getZonaPref().comprobarDisponibilidad(numSilla)) {
+                    sala.getZonaPref().llenarSillas(numSilla);
+                    infoZonaYSilla.add(2);
+                    infoZonaYSilla.add(numSilla);
+                    sumarDinero(10000);
+                    aux = true;
+                } else {
+                    System.out.print("\n##### Silla no disponible, por favor elija otra #####\n");
+                }
+            }
+
+            return infoZonaYSilla;
+        }
+    }
 
     public ArrayList<Integer> getHoraPelicula (String pelicula) {
         ArrayList<Integer> horaPelicula= new ArrayList<>();
@@ -111,7 +211,6 @@ public class FuncionCine {
                 horaPelicula.add(listaFuncionesSala4.get(j).getHorarioInicio());
             }
         }
-        //System.out.print(pelicula + " : " + horaPelicula + "[Formato 24 Horas]");
         return horaPelicula;
 
     }
@@ -142,6 +241,27 @@ public class FuncionCine {
 
     }
 
+    public void sumarDinero(int dinero){
+
+        this.dineroRecaudado = this.dineroRecaudado + dinero;
+
+    }
+
+    public ArrayList<Integer> getInfoZonaYSilla() {
+        return infoZonaYSilla;
+    }
+
+    public void setInfoZonaYSilla(ArrayList<Integer> infoZonaYSilla) {
+        this.infoZonaYSilla = infoZonaYSilla;
+    }
+
+    public ArrayList<SalaCine> getSalasCines() {
+        return salasCines;
+    }
+
+    public void setSalasCines(ArrayList<SalaCine> salasCines) {
+        this.salasCines = salasCines;
+    }
 }
 
 

@@ -3,21 +3,20 @@ import java.util.Scanner;
 
 public class Tiquete {
 
-    private String referencia;
     private String nombreCliente;
     private String idCliente;
     private String idVendedor;
     private FuncionCine funciones;
     private Cliente cliente;
     private Scanner scanner;
+    private int numPel;
     //private Vendedor vendedor;
 
     private int precio;
 
-    public Tiquete(String referencia, String idVendedor) {
+    public Tiquete(String idVendedor) {
 
         this.scanner = new Scanner(System.in);
-        this.referencia = referencia;
         this.idVendedor = idVendedor;
         this.funciones = new FuncionCine();
         //this.vendedor = vendedor;
@@ -34,7 +33,7 @@ public class Tiquete {
             System.out.print("\n Por favor, seleccione una opcion\n");
             System.out.print("\n [1] Ver Cartelera General");
             System.out.print("\n [2] Comprar Tiquete");
-            System.out.print("\n [3] Cancelar Tiquete");
+            System.out.print("\n [3] Ver Tiquete");
             System.out.print("\n [4] Salir \n");
             System.out.print("##### © 2022 Cine Colombia ##### \n");
 
@@ -50,9 +49,10 @@ public class Tiquete {
                     break;
                 case 2:
                     asignarPelicula();
+                    asignarAsientos();
                     break;
                 case 3:
-                    //crear funcion
+                    generarBoletoString();
                     break;
                 default:
                     System.out.print("Error: Opcion fuera de los parametros, volviendo al inicio...");
@@ -80,32 +80,36 @@ public class Tiquete {
         //Elegir Pelicula
         System.out.print("\n##### Por favor, elija la pelicula que desea ver ##### \n");
         funciones.getPeliculas();
-        int numPel = Integer.parseInt(scanner.nextLine());
+        this.numPel = Integer.parseInt(scanner.nextLine());
 
-        String nombrePelElegida = funciones.getPeliculas(numPel);
+        String nombrePelElegida = funciones.getPeliculas(this.numPel);
 
         System.out.print("\n##### Horarios ##### \n");
-        System.out.print("Por favor elija el numero de Sala");
+        System.out.print("Por favor elija el numero de Sala \n");
         funciones.mostrarHorarioYSala(funciones.getHoraPelicula(nombrePelElegida));
-        int numSala = Integer.parseInt(scanner.nextLine());
-
-        //Paso a Funcion de asignarAsientos
-        asignarAsientos(numSala);
 
     }
 
-    public void asignarAsientos(int numSala){
+    public void asignarAsientos(){
+        int numSala = 0;
 
+        while (numSala < 1 || numSala > 4){
+            numSala = Integer.parseInt(scanner.nextLine());
+            if(!funciones.comprobarSala(numSala)){
+                System.out.print("\n Escoja otra sala");
+                numSala = 0;
+            }
+            else{
+            }
+        }
     }
 
-
-    public String getReferencia() {
-        return referencia;
+    public void generarBoletoString(){
+        System.out.print("\n##### Informacion Boleto ##### \n");
+        System.out.print("Nombre del Cliente: " + this.nombreCliente + "         Documento Identidad: " + this.idCliente);
+        System.out.print("Pelicula: " +  funciones.getPeliculas(this.numPel) );
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
 
     public String getNombreCliente() {
         return nombreCliente;
