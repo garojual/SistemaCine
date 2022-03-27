@@ -6,36 +6,49 @@ public class SalaCine {
     private boolean isLlena;
     private Zona zonaPref;
     private Zona zonaNormal;
-/*
-    private ArrayList<Integer> sillasOcupadasPref= zonaPref.getSillasOcupadas();
-    private ArrayList<Integer> sillasOcupadasNormal= zonaNormal.getSillasOcupadas();
-    private ArrayList<Integer> sillasTotalesPref= zonaPref.getSillasTotales();
-    private ArrayList<Integer> sillasTotalesNormal= zonaNormal.getSillasTotales();*/
-    private ArrayList<Integer> sillasOcupadasPref;
-    private ArrayList<Integer> sillasOcupadasNormal;
-    private ArrayList<Integer> sillasTotalesPref;
-    private ArrayList<Integer> sillasTotalesNormal;
+
 
     public SalaCine() {
 
-        this.zonaPref = new Zona();
-        this.zonaNormal = new Zona();
+        this.zonaPref = new Zona(20);
+        this.zonaNormal = new Zona(30);
 
-        sillasOcupadasPref = new ArrayList<>();
-        sillasOcupadasNormal = new ArrayList<>();
-        sillasTotalesPref = new ArrayList<>();
-        sillasTotalesNormal = new ArrayList<>();
     }
 
     public boolean isSalaLlena (){
         boolean isLlena= false;
-        if (sillasOcupadasNormal.size()==sillasTotalesNormal.size() && sillasOcupadasPref.size()== sillasTotalesPref.size() ) {
+        if (zonaPref.comprobarLlenas() && zonaNormal.comprobarLlenas()) {
             isLlena = true;
         }
-
         return isLlena;
     }
 
+    public void elegirSillaPorZona(int num, int numSilla){
+
+        switch (num){
+            case 1:
+                if(zonaNormal.comprobarDisponibilidad(numSilla)){
+                    zonaNormal.llenarSillas(numSilla);
+                    System.out.print("Silla " + numSilla + " Registrada Correctamente");
+                    break;
+                }
+                else{
+                    System.out.print("Silla Ocupada");
+                    break;
+                }
+            case 2:
+                if(zonaPref.comprobarDisponibilidad(numSilla)){
+                    zonaPref.llenarSillas(numSilla);
+                    System.out.print("Silla " + numSilla + " Registrada Correctamente");
+                    break;
+                }
+                else{
+                    System.out.print("Silla Ocupada");
+                    break;
+                }
+        }
+
+    }
 
     public boolean isLlena() {
 

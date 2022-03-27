@@ -90,6 +90,9 @@ public class Tiquete {
 
         int salaElegida = Integer.parseInt(scanner.nextLine());
 
+    }
+
+    public void asignarAsientos(){
 
     }
 

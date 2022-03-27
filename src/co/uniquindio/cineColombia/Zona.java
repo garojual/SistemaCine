@@ -6,9 +6,28 @@ public class Zona {
     private ArrayList<Integer> sillasOcupadas;
     private ArrayList<Integer> sillasTotales; //Si es constante, considerar usar una lista normal
 
-    public Zona() {
-        this.sillasOcupadas = new ArrayList<>();
-        this.sillasTotales = new ArrayList<>();
+
+    public Zona(int numSillas) {
+        sillasTotales = new ArrayList<>();
+        sillasOcupadas = new ArrayList<>();
+
+
+        for(int i = 0; i < numSillas; i++){
+            sillasTotales.add(i+1);
+        }
+    }
+
+    public boolean comprobarDisponibilidad(int numSilla){
+        boolean disponible = true;
+
+        for(int i = 0; i < sillasOcupadas.size(); i++){
+            if(numSilla == sillasOcupadas.get(i)){
+                disponible = false;
+                System.out.print("Ocupado");
+            }
+        }
+        System.out.print(disponible);
+        return disponible;
     }
 
     public void  llenarSillas (int numSilla){
@@ -17,6 +36,14 @@ public class Zona {
                 sillasOcupadas.add(numSilla);
             }
         }
+    }
+
+    public boolean comprobarLlenas(){
+        boolean aux = false;
+        if(sillasTotales.size() == sillasOcupadas.size()){
+            aux = true;
+        }
+        return aux;
     }
 
 
